@@ -1,5 +1,5 @@
 var inquirer = require('inquirer');
-const { fstat } = require('node:fs');
+const fs  = require('fs');
 inquirer
   .prompt([
    {
@@ -90,7 +90,7 @@ inquirer
         git,
         email
       }) => { 
-          const temp = `# ${title}
+          const template = `# ${title}
           
           * [Description](#description)
           * [Contents](#contents)
@@ -126,8 +126,8 @@ inquirer
     // Use user feedback for... whatever!!
   });
 
-  function createNewFile(fileName,template){
-      fstat.writeFile(`./${fileName.toLowerCase().split('').join('')}.md`, data, (err)=> {
+  function createNewFile(fileName,data){
+      fs.writeFile(`./${fileName.toLowerCase().split('').join('')}.md`, data, (err)=> {
         if(err){
             console.log(err)
         }
